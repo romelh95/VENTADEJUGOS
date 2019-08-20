@@ -1,0 +1,21 @@
+-- este bloque suma 
+LIBRARY IEEE;
+USE  IEEE.STD_LOGIC_1164.all;
+USE  IEEE.STD_LOGIC_UNSIGNED.all;
+
+ENTITY precio IS
+	PORT(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,mezcla: in std_logic_vector(4 downto 0);
+			precio: out std_logic_vector(10 downto 0));
+end precio;
+
+
+ARCHITECTURE sol OF precio IS
+
+BEGIN
+	process(q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,mezcla) is
+		begin
+			precio<= q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+mezcla;
+
+	end process;
+	
+end sol;

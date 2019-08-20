@@ -1,0 +1,37 @@
+--MSS de la maquina
+
+LIBRARY IEEE;
+USE  IEEE.STD_LOGIC_1164.all;
+USE  IEEE.STD_LOGIC_UNSIGNED.all;
+entity MSS is
+	port	(clock, resetn, start, jugo, consulta, llenado, finjugo,jugoselec: in std_logic;
+			exito, falla,led: out std_logic);
+
+end MSS;
+
+architecture sol of MSS is
+type estado is (ta, tb, tc, td, te, tf, tg, th, ti,tp);
+signal y: estado;
+begin
+MSS_transiciones:process(resetn,clock)
+	begin
+		if (resetn='0') then y<=ta;
+		elsif(clock'event and clock='1') then
+			case y is
+						when ta =>if start='1' then y<=tb;--presiono start
+										else y<=ta;end if;
+						when tb =>if start='0' then y<=tc;--suelto start
+										else y<=tb;end if;
+						when tc => y<=td;
+						when td => if jugo='1' then y<=te;--seleccion del menu
+										elsif consula ='1' them y<=tp;
+										else y<=td;end if;
+						when te => if jugoselec='1' then y<=tf;--espera a que se selecciones un jugo
+										else y<=te;end if;
+						when tf => if jugoselec='0' then y<=tg;--espera a que sueltes el boton de jugo
+										else y<=tf;end if;
+						when tf => if jugo='1' then y<=te;--apretar jugo para mezclar
+										elsif finjugo='1' then y<=tg;-- apretar fin jugo para terminar
+										else y<=tf;
+						
+						

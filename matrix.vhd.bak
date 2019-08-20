@@ -1,0 +1,33 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+use IEEE.NUMERIC_STD.all;
+
+entity matrix is
+	port(numero1, numero2: in std_logic_vector(4 downto 0);
+			sal1,sal2,sal3: out std_logic_vector(4 downto 0));
+end matrix;
+
+architecture sol of matrix is
+
+begin
+		process(numero)
+			begin
+				case numero is 
+						when "0000" => sal1<="00000";sal2<="01110";sal3<="00000";--cero
+						when "0001" => sal1<="00000";sal2<="11111";sal3<="00000";--uno
+						
+						when "0010" => sal1<="01000";sal2<="01010";sal3<="00010";
+						when "0011" => sal1<="01110";sal2<="01010";sal3<="00000";
+						
+						when "0100" => sal1<="00011";sal2<="11011";sal3<="00000";--cuatro
+						when "0101" => sal1<="00010";sal2<="01010";sal3<="01000";
+						
+						when "0110" => sal1<="00000";sal2<="01010";sal3<="01000";--seis
+						when "0111" => sal1<="01111";sal2<="01111";sal3<="00000";
+						
+						when "1000" => sal1<="00000";sal2<="01010";sal3<="00000";
+						when "1001" => sal1<="00011";sal2<="01110";sal3<="00000";--nueve
+				end case;
+		end process;
+end sol;

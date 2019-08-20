@@ -1,0 +1,45 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+use IEEE.NUMERIC_STD.all;
+
+entity preciojugos is
+	port(data: in std_logic_vector(9 downto 0);
+	enable,reset,clock: in std_logic;
+	q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q: out std_logic_vector(10 downto 0));
+end preciojugos;
+architecture sol of bloquejugos is
+signal r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,suma: std_logic_vector(10 downto 0);
+begin
+	PROCESS(clock,reset)
+		BEGIN
+		if reset='0' then --dar valores de 0 a la salida y buffers
+				r1<="00000000000";q1<="00000000000";
+				r2<="00000000000";q2<="00000000000";
+				r3<="00000000000";q3<="00000000000";
+				r4<="00000000000";q4<="00000000000";
+				r5<="00000000000";q5<="00000000000";
+				r6<="00000000000";q6<="00000000000";
+				r7<="00000000000";q7<="00000000000";
+				r8<="00000000000";q8<="00000000000";
+				r9<="00000000000";q9<="00000000000";
+				r10<="00000000000";q10<="00000000000";
+				suma<="00000000000";
+		elsif (clock'event and clock='1') then
+				if(enable='1') then -- se le suma el precio cada vez que se activa la entrada y hay un ciclo de reloj
+						suma<= suma+1;
+						if (data= "0000000001") then q1<=r1+70 ; r1<=r1+70;-- se suma el precio
+						elsif (data= "0000000010") then q2<=r2+50;r2<=r2+50;
+						elsif (data= "0000000100") then q3<=r3+45;r3<=r3+45;
+						elsif (data= "0000001000") then q4<=r4+80;r4<=r4+80;
+						elsif (data= "0000010000") then q5<=r5+65;r5<=r5+65;
+						elsif (data= "0000100000") then q6<=r6+55;r6<=r6+55;
+						elsif (data= "0001000000") then q7<=r7+30;r7<=r7+30;
+						elsif (data= "0010000000") then q8<=r8+45;r8<=r8+45;
+						elsif (data= "0100000000") then q9<=r9+50;r9<=r9+50;
+						elsif (data= "1000000000") then q10<=r10+60;r10<=r10+60;
+						end if;
+				end if;
+		end if;
+	end process;
+end sol;
